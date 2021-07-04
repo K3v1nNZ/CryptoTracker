@@ -1,0 +1,4 @@
+discord==1.0.1
+discord.py==1.7.2
+pycoingecko==2.0.0
+requests==2.25.1
