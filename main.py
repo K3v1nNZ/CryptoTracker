@@ -1,3 +1,6 @@
+#MIT License
+#Copyright (c) 2021 K3v1nNZ
+
 import discord
 import requests
 import json
