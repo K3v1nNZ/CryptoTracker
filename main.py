@@ -19,6 +19,18 @@ async def on_ready():
     print("Bot is on and is using {0.user} ".format(client))
     print(str(len(client.guilds)))
 
+@client.event
+async def on_guild_join(guild):
+    for channel in guild.text_channels:
+        if channel.permissions_for(guild.me).send_messages:
+            embed=discord.Embed(title="Thanks!", description="Hey! Thank you for inviting me to your discord server! I can help you easily find out the value of crpytocurrencies!", color=0xff8000)
+            embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/841788781958660106/ec54482284fa3f5d53106d1edb8a0748.png?size=256")
+            embed.add_field(name="Commands", value="For a full list of all of my available commands and cryptocurrencies, type in the command: $cryptohelp", inline=False)
+            embed.add_field(name="Crypto Currencies", value="If there is a crypto currency that you don't see on the bot and would like, send me a dm at !Kevin!#9686.", inline=False)
+            embed.add_field(name="Have fun!", value="If there are any issues you encounter and would like to report, send me a dm at !Kevin!#9686.", inline=False)
+            await channel.send(embed=embed)
+        break
+    
 @client.command()
 async def cryptohelp(ctx):
     embed=discord.Embed(title="Help", description="A list of all the supported Cryptocurrencies")
