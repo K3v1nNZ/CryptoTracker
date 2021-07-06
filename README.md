@@ -1,3 +1,11 @@
 # CryptoTracker
 
-![crypto tracker picture](https://cdn.discordapp.com/avatars/841788781958660106/ec54482284fa3f5d53106d1edb8a0748.png?size=256)
+Crypto Tracker is a Discord bot written in discord.py that can easily get the value of most cryptocurrencys.
+
+## Pull requests
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
