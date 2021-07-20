@@ -24,18 +24,20 @@ async def on_guild_join(guild):
     for channel in guild.text_channels:
         if channel.permissions_for(guild.me).send_messages:
             embed=discord.Embed(title="Thanks!", description="Hey! Thank you for inviting me to your discord server! I can help you easily find out the value of crpytocurrencies!", color=0xff8000)
+            embed.set_author(name="Support Server", url="https://discord.gg/VhJdfQ29gx")
             embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/841788781958660106/ec54482284fa3f5d53106d1edb8a0748.png?size=256")
             embed.add_field(name="Commands", value="For a full list of all of my available commands and cryptocurrencies, type in the command: $cryptohelp", inline=False)
             embed.add_field(name="Crypto Currencies", value="If there is a crypto currency that you don't see on the bot and would like, send me a dm at !Kevin!#9686.", inline=False)
             embed.add_field(name="Have fun!", value="If there are any issues you encounter and would like to report, send me a dm at !Kevin!#9686.", inline=False)
             await channel.send(embed=embed)
         break
-    
+
 @client.command()
 async def cryptohelp(ctx):
     embed=discord.Embed(title="Help", description="A list of all the supported Cryptocurrencies")
     embed.add_field(name="Aave", value="Value of aave", inline=True)
     embed.add_field(name="Avalanche", value="Value of avalanche", inline=True)
+    embed.add_field(name="AxieInfinity", value="Value of axie infinity", inline=True)
     embed.add_field(name="BinanceCoin", value="Value of binancecoin", inline=True)
     embed.add_field(name="Bitcoin", value="Value of bitcoin", inline=True)
     embed.add_field(name="BitcoinCash", value="Value of bitcoincash", inline=True)
@@ -43,6 +45,7 @@ async def cryptohelp(ctx):
     embed.add_field(name="Cardano", value="Value of cardano", inline=True)
     embed.add_field(name="Chainlink", value="Value of chainlink", inline=True)
     embed.add_field(name="Cosmos", value="Value of cosmos", inline=True)
+    embed.add_field(name="CryptoBlades", value="Value of cryptoblades", inline=True)
     embed.add_field(name="Dogecoin", value="Value of dogecoin", inline=True)
     embed.add_field(name="Eos", value="Value of eos", inline=True)
     embed.add_field(name="Ethereum", value="Value of ethereum", inline=True)
@@ -59,6 +62,7 @@ async def cryptohelp(ctx):
     embed.add_field(name="Polygon", value="Value of polygon", inline=True)
     embed.add_field(name="Ripple", value="Value of ripple", inline=True)
     embed.add_field(name="ShibaInu", value="Value of shibainu", inline=True)
+    embed.add_field(name="SLP", value="Value of smooth love potion", inline=True)
     embed.add_field(name="Solana", value="Value of solana", inline=True)
     embed.add_field(name="Stellar", value="Value of stellar", inline=True)
     embed.add_field(name="Terra", value="Value of terra", inline=True)
@@ -581,4 +585,46 @@ async def WrappedBitcoin(ctx):
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
-client.run("put token in here")
+@client.command()
+async def SLP(ctx):
+    PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=aud").text
+    PRICE = json.loads(PRICE)
+    CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=aud&include_24hr_change=true").text
+    CHANGE = json.loads(CHANGE)
+    test = round(CHANGE["smooth-love-potion"]["aud_24h_change"], 2)
+    embed=discord.Embed(title="SLP", description="The value of Smooth Love Potion!", color=0xEB34C6)
+    embed.set_thumbnail(url="https://assets.coingecko.com/coins/images/10366/large/SLP.png?1578640057")
+    embed.set_author(name = "Smooth Love Potion")
+    embed.add_field(name=PRICE["smooth-love-potion"]["aud"], value="AUD", inline=False)
+    embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
+    await ctx.send(embed=embed)
+
+@client.command()
+async def AxieInfinity(ctx):
+    PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=aud").text
+    PRICE = json.loads(PRICE)
+    CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=aud&include_24hr_change=true").text
+    CHANGE = json.loads(CHANGE)
+    test = round(CHANGE["axie-infinity"]["aud_24h_change"], 2)
+    embed=discord.Embed(title="AXS", description="The value of Axie Infinity!", color=0x036FFC)
+    embed.set_thumbnail(url="https://assets.coingecko.com/coins/images/13029/large/axie_infinity_logo.png?1604471082")
+    embed.set_author(name = "Axie Infinity")
+    embed.add_field(name=PRICE["axie-infinity"]["aud"], value="AUD", inline=False)
+    embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
+    await ctx.send(embed=embed)
+
+@client.command()
+async def CryptoBlades(ctx):
+    PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=cryptoblades&vs_currencies=aud").text
+    PRICE = json.loads(PRICE)
+    CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=cryptoblades&vs_currencies=aud&include_24hr_change=true").text
+    CHANGE = json.loads(CHANGE)
+    test = round(CHANGE["cryptoblades"]["aud_24h_change"], 2)
+    embed=discord.Embed(title="SKILL", description="The value of CryptoBlades!", color=0x6E6E6E)
+    embed.set_thumbnail(url="https://assets.coingecko.com/coins/images/15334/large/cryptoblade.PNG?1620596874")
+    embed.set_author(name = "CryptoBlades")
+    embed.add_field(name=PRICE["cryptoblades"]["aud"], value="AUD", inline=False)
+    embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
+    await ctx.send(embed=embed)
+
+client.run("insert token here")
