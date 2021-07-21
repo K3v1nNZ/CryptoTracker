@@ -91,7 +91,7 @@ async def Ethereum(ctx):
     embed=discord.Embed(title="ETH", description="The value of Ethereum!", color=0x0294c4)
     embed.set_thumbnail(url="https://icons.iconarchive.com/icons/cjdowner/cryptocurrency-flat/1024/Ethereum-ETH-icon.png")
     embed.set_author(name = "Ethereum")
-    embed.add_field(name=ETH["ethereum"]["usd"], value="usd", inline=False)
+    embed.add_field(name=ETH["ethereum"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -105,7 +105,7 @@ async def Bitcoin(ctx):
     embed=discord.Embed(title="BTC", description="The value of Bitcoin!", color=0xFF9900)
     embed.set_thumbnail(url="https://miro.medium.com/max/410/1*U7phpu7aKKrU05JvMvs-wA.png")
     embed.set_author(name = "Bitcoin")
-    embed.add_field(name=BTC["bitcoin"]["usd"], value="usd", inline=False)
+    embed.add_field(name=BTC["bitcoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -119,7 +119,7 @@ async def Dogecoin(ctx):
     embed=discord.Embed(title="DOGE", description="The value of Dogecoin!", color=0xCB9800)
     embed.set_thumbnail(url="https://upload.wikimedia.org/wikipedia/en/d/d0/Dogecoin_Logo.png")
     embed.set_author(name = "Dogecoin")
-    embed.add_field(name=DOGE["dogecoin"]["usd"], value="usd", inline=False)
+    embed.add_field(name=DOGE["dogecoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -133,7 +133,7 @@ async def EthereumClassic(ctx):
     embed=discord.Embed(title="ETC", description="The value of Ethereum Classic!", color=0x8CC43C)
     embed.set_thumbnail(url="https://www.benzinga.com/files/images/story/2012/1321.png")
     embed.set_author(name = "Ethereum Classic")
-    embed.add_field(name=ETC["ethereum-classic"]["usd"], value="usd", inline=False)
+    embed.add_field(name=ETC["ethereum-classic"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -147,7 +147,7 @@ async def ShibaInu(ctx):
     embed=discord.Embed(title="SHIB", description="The value of Shiba Inu!", color=0x8E3C24)
     embed.set_thumbnail(url="https://styles.redditmedia.com/t5_3uvocd/styles/communityIcon_qgoetx3njan61.png?width=256&s=b32baf76be1c50fe7d04a6a2d7544878798d5255")
     embed.set_author(name = "Shiba Inu")
-    embed.add_field(name=SHIB["shiba-inu"]["usd"], value="usd", inline=False)
+    embed.add_field(name=SHIB["shiba-inu"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -161,7 +161,7 @@ async def Ripple(ctx):
     embed=discord.Embed(title="XRP", description="The value of Ripple!", color=0x434C54)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/xrp-xrp-logo.png")
     embed.set_author(name = "Ripple")
-    embed.add_field(name=XRP["ripple"]["usd"], value="usd", inline=False)
+    embed.add_field(name=XRP["ripple"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -175,7 +175,7 @@ async def Orfano(ctx):
     embed=discord.Embed(title="ORFANO", description="The value of Orfano!", color=0xC81CFC)
     embed.set_thumbnail(url="https://www.orfano.io/img/core-img/favicon.ico")
     embed.set_author(name = "Orfano")
-    embed.add_field(name=ORFAN["orfano"]["usd"], value="usd", inline=False)
+    embed.add_field(name=ORFAN["orfano"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -189,7 +189,7 @@ async def Litecoin(ctx):
     embed=discord.Embed(title="LTC", description="The value of Litecoin!", color=0x333333)
     embed.set_thumbnail(url="https://cdn.freelogovectors.net/wp-content/uploads/2021/01/litecoin-logo-freelogovectors.net_.png")
     embed.set_author(name = "Litecoin")
-    embed.add_field(name=LTC["litecoin"]["usd"], value="usd", inline=False)
+    embed.add_field(name=LTC["litecoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -203,7 +203,7 @@ async def Cardano(ctx):
     embed=discord.Embed(title="ADA", description="The value of Cardano!", color=0x0377FC)
     embed.set_thumbnail(url="https://cdn4.iconfinder.com/data/icons/crypto-currency-and-coin-2/256/cardano_ada-512.png")
     embed.set_author(name = "Cardano")
-    embed.add_field(name=ADA["cardano"]["usd"], value="usd", inline=False)
+    embed.add_field(name=ADA["cardano"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -217,7 +217,7 @@ async def BinanceCoin(ctx):
     embed=discord.Embed(title="BNB", description="The value of Binance Coin!", color=0xF3BA2F)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/binance-coin-bnb-logo.png")
     embed.set_author(name = "Binance Coin")
-    embed.add_field(name=BNB["binancecoin"]["usd"], value="usd", inline=False)
+    embed.add_field(name=BNB["binancecoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -231,7 +231,7 @@ async def Venus(ctx):
     embed=discord.Embed(title="XVS", description="The value of Venus!", color=0xF3BA2F)
     embed.set_thumbnail(url="https://research.binance.com/static/images/projects/venus/logo.png")
     embed.set_author(name = "Venus")
-    embed.add_field(name=XVS["venus"]["usd"], value="usd", inline=False)
+    embed.add_field(name=XVS["venus"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -245,7 +245,7 @@ async def IOTA(ctx):
     embed=discord.Embed(title="MIOTA", description="The value of IOTA!", color=0x000000)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/iota-miota-logo.png")
     embed.set_author(name = "IOTA")
-    embed.add_field(name=PRICE["iota"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["iota"]["usd"], value="USD", inline=False)
     embed.add_field(name=CHANGE["iota"]["usd_24h_change"], value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -259,7 +259,7 @@ async def FTXToken(ctx):
     embed=discord.Embed(title="FTT", description="The value of FTX Token!", color=0x00D0FF)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/ftx-token-ftt-logo.png")
     embed.set_author(name = "FTX Token")
-    embed.add_field(name=PRICE["ftx-token"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["ftx-token"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -273,7 +273,7 @@ async def Tezos(ctx):
     embed=discord.Embed(title="XTZ", description="The value of Tezos!", color=0x0088FF)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/tezos-xtz-logo.png?v=010")
     embed.set_author(name = "Tezos")
-    embed.add_field(name=PRICE["tezos"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["tezos"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -287,7 +287,7 @@ async def Cosmos(ctx):
     embed=discord.Embed(title="ATOM", description="The value of Cosmos!", color=0x050052)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/cosmos-atom-logo.png?v=010")
     embed.set_author(name = "Cosmos")
-    embed.add_field(name=PRICE["cosmos"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["cosmos"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -301,7 +301,7 @@ async def PancakeSwap(ctx):
     embed=discord.Embed(title="CAKE", description="The value of PancakeSwap!", color=0xD47726)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/pancakeswap-cake-logo.png?v=010")
     embed.set_author(name = "PancakeSwap")
-    embed.add_field(name=PRICE["pancakeswap-token"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["pancakeswap-token"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -315,7 +315,7 @@ async def Maker(ctx):
     embed=discord.Embed(title="MKR", description="The value of Maker!", color=0x00ADA2)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/maker-mkr-logo.png?v=010")
     embed.set_author(name = "Maker")
-    embed.add_field(name=PRICE["maker"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["maker"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -329,7 +329,7 @@ async def Avalanche(ctx):
     embed=discord.Embed(title="AVAX", description="The value of Avalanche!", color=0xFF4D00)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/avalanche-avax-logo.png?v=010")
     embed.set_author(name = "Avalanche")
-    embed.add_field(name=PRICE["avalanche"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["avalanche"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -343,7 +343,7 @@ async def Kusama(ctx):
     embed=discord.Embed(title="KSM", description="The value of Kusama!", color=0x000000)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/kusama-ksm-logo.png?v=010")
     embed.set_author(name = "Kusama")
-    embed.add_field(name=PRICE["kusama"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["kusama"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -357,7 +357,7 @@ async def Filecoin(ctx):
     embed=discord.Embed(title="FIL", description="The value of Filecoin!", color=0x00B3FF)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/filecoin-fil-logo.png?v=010")
     embed.set_author(name = "Filecoin")
-    embed.add_field(name=PRICE["filecoin"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["filecoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -371,7 +371,7 @@ async def Polygon(ctx):
     embed=discord.Embed(title="MATIC", description="The value of Polygon!", color=0x77299E)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/polygon-matic-logo.png?v=010")
     embed.set_author(name = "Polygon")
-    embed.add_field(name=PRICE["matic-network"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["matic-network"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -385,7 +385,7 @@ async def Terra(ctx):
     embed=discord.Embed(title="LUNA", description="The value of Terra!", color=0x3700FF)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/terra-luna-luna-logo.png?v=010")
     embed.set_author(name = "Terra")
-    embed.add_field(name=PRICE["terra-luna"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["terra-luna"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -399,7 +399,7 @@ async def Solana(ctx):
     embed=discord.Embed(title="SOL", description="The value of Solana!", color=0x00FFE5)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/solana-sol-logo.png?v=010")
     embed.set_author(name = "Solana")
-    embed.add_field(name=PRICE["solana"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["solana"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -413,7 +413,7 @@ async def BitcoinSV(ctx):
     embed=discord.Embed(title="BSV", description="The value of Bitcoin SV!", color=0xFF9900)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/bitcoin-sv-bsv-logo.png?v=010")
     embed.set_author(name = "Bitcoin SV")
-    embed.add_field(name=PRICE["bitcoin-cash-sv"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["bitcoin-cash-sv"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -427,7 +427,7 @@ async def Tron(ctx):
     embed=discord.Embed(title="TRX", description="The value of Tron!", color=0xFC1703)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/tron-trx-logo.png?v=010")
     embed.set_author(name = "Tron")
-    embed.add_field(name=PRICE["tron"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["tron"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -441,7 +441,7 @@ async def Uniswap(ctx):
     embed=discord.Embed(title="UNI", description="The value of Uniswap!", color=0xFC1703)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/uniswap-uni-logo.png?v=010")
     embed.set_author(name = "Uniswap")
-    embed.add_field(name=PRICE["uniswap"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["uniswap"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -455,7 +455,7 @@ async def Chainlink(ctx):
     embed=discord.Embed(title="LINK", description="The value of Chainlink!", color=0x0062FF)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/chainlink-link-logo.png?v=010")
     embed.set_author(name = "Chainlink")
-    embed.add_field(name=PRICE["chainlink"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["chainlink"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -469,7 +469,7 @@ async def Vechain(ctx):
     embed=discord.Embed(title="VET", description="The value of VeChain!", color=0x00D0FF)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/vechain-vet-logo.png?v=010")
     embed.set_author(name = "VeChain")
-    embed.add_field(name=PRICE["vechain"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["vechain"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -483,7 +483,7 @@ async def Stellar(ctx):
     embed=discord.Embed(title="XLM", description="The value of Stellar!", color=0x000000)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/stellar-xlm-logo.png?v=010")
     embed.set_author(name = "Stellar")
-    embed.add_field(name=PRICE["stellar"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["stellar"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -497,7 +497,7 @@ async def Neo(ctx):
     embed=discord.Embed(title="NEO", description="The value of Neo!", color=0x00FF99)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/neo-neo-logo.png?v=010")
     embed.set_author(name = "Neo")
-    embed.add_field(name=PRICE["neo"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["neo"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -511,7 +511,7 @@ async def Aave(ctx):
     embed=discord.Embed(title="AAVE", description="The value of Aave!", color=0xB300FF)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/aave-aave-logo.png?v=010")
     embed.set_author(name = "Aave")
-    embed.add_field(name=PRICE["aave"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["aave"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -525,7 +525,7 @@ async def Eos(ctx):
     embed=discord.Embed(title="EOS", description="The value of Eos!", color=0x000000)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/eos-eos-logo.png?v=010")
     embed.set_author(name = "Eos")
-    embed.add_field(name=PRICE["eos"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["eos"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -539,7 +539,7 @@ async def Theta(ctx):
     embed=discord.Embed(title="THETA", description="The value of Theta!", color=0x00FF99)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/theta-theta-logo.png?v=010")
     embed.set_author(name = "Theta")
-    embed.add_field(name=PRICE["theta-token"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["theta-token"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -553,7 +553,7 @@ async def BitcoinCash(ctx):
     embed=discord.Embed(title="BCH", description="The value of Bitcoin Cash!", color=0x00FF44)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/bitcoin-cash-bch-logo.png?v=010")
     embed.set_author(name = "Bitcoin Cash")
-    embed.add_field(name=PRICE["bitcoin-cash"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["bitcoin-cash"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -567,7 +567,7 @@ async def UsdCoin(ctx):
     embed=discord.Embed(title="USDC", description="The value of Usd Coin!", color=0x0062FF)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/usd-coin-usdc-logo.png?v=010")
     embed.set_author(name = "Usd Coin")
-    embed.add_field(name=PRICE["usd-coin"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["usd-coin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -581,7 +581,7 @@ async def WrappedBitcoin(ctx):
     embed=discord.Embed(title="WBTC", description="The value of Wrapped Bitcoin!", color=0xFF9900)
     embed.set_thumbnail(url="https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.png?v=010")
     embed.set_author(name = "Wrapped Bitcoin")
-    embed.add_field(name=PRICE["wrapped-bitcoin"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["wrapped-bitcoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -595,7 +595,7 @@ async def SLP(ctx):
     embed=discord.Embed(title="SLP", description="The value of Smooth Love Potion!", color=0xEB34C6)
     embed.set_thumbnail(url="https://assets.coingecko.com/coins/images/10366/large/SLP.png?1578640057")
     embed.set_author(name = "Smooth Love Potion")
-    embed.add_field(name=PRICE["smooth-love-potion"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["smooth-love-potion"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -609,7 +609,7 @@ async def AxieInfinity(ctx):
     embed=discord.Embed(title="AXS", description="The value of Axie Infinity!", color=0x036FFC)
     embed.set_thumbnail(url="https://assets.coingecko.com/coins/images/13029/large/axie_infinity_logo.png?1604471082")
     embed.set_author(name = "Axie Infinity")
-    embed.add_field(name=PRICE["axie-infinity"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["axie-infinity"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
@@ -623,7 +623,7 @@ async def CryptoBlades(ctx):
     embed=discord.Embed(title="SKILL", description="The value of CryptoBlades!", color=0x6E6E6E)
     embed.set_thumbnail(url="https://assets.coingecko.com/coins/images/15334/large/cryptoblade.PNG?1620596874")
     embed.set_author(name = "CryptoBlades")
-    embed.add_field(name=PRICE["cryptoblades"]["usd"], value="usd", inline=False)
+    embed.add_field(name=PRICE["cryptoblades"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
     await ctx.send(embed=embed)
 
