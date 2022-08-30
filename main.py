@@ -1,40 +1,35 @@
-#MIT License
-#Copyright (c) 2021 K3v1nNZ
+import json
 
 import discord
 import requests
-import json
-import pycoingecko
-from discord.ext import commands
-from discord.ext.commands import Bot
-from pycoingecko import CoinGeckoAPI
-cg = CoinGeckoAPI()
+import os
+import requests
+from dotenv import load_dotenv
 
-client = commands.Bot(command_prefix = '$', case_insensitive = True)
-client.remove_command('help')
+load_dotenv()
+BOT_TOKEN = os.getenv('BOT_DEV_TOKEN')
+# DBL_TOKEN = os.getenv('DBL_TOKEN')
+bot = discord.Bot()
 
-@client.event
+
+@bot.event
 async def on_ready():
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="$cryptohelp"))
-    print("Bot is on and is using {0.user} ".format(client))
-    print(str(len(client.guilds)))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="/cryptohelp"))
+    print(f"{bot.user} is ready and online!".format(bot))
+    print(str(len(bot.guilds)))
 
-@client.event
-async def on_guild_join(guild):
-    for channel in guild.text_channels:
-        if channel.permissions_for(guild.me).send_messages:
-            embed=discord.Embed(title="Thanks!", description="Hey! Thank you for inviting me to your discord server! I can help you easily find out the value of crpytocurrencies!", color=0xff8000)
-            embed.set_author(name="Support Server", url="https://discord.gg/VhJdfQ29gx")
-            embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/841788781958660106/ec54482284fa3f5d53106d1edb8a0748.png?size=256")
-            embed.add_field(name="Commands", value="For a full list of all of my available commands and cryptocurrencies, type in the command: $cryptohelp", inline=False)
-            embed.add_field(name="Crypto Currencies", value="If there is a crypto currency that you don't see on the bot and would like, send me a dm at !Kevin!#9686.", inline=False)
-            embed.add_field(name="Have fun!", value="If there are any issues you encounter and would like to report, send me a dm at !Kevin!#9686.", inline=False)
-            await channel.send(embed=embed)
-        break
+# @bot.event()
+# async def on_autopost_success():
+#     print(f"Posted server count ({client.topggpy.guild_count})")
 
-@client.command()
+@bot.slash_command(name = "cryptohelp", description = "Display all the commands for the bot.")
 async def cryptohelp(ctx):
-    embed=discord.Embed(title="Help", description="A list of all the supported Cryptocurrencies")
+    embed = discord.Embed(
+        title="Help",
+        description="A list of all the supported Cryptocurrencies",
+        color=0x000000
+    )
+    embed.add_field(name="Hoststats", value="Check the bots OS, Hosting Service, discord.py version and memory.", inline=True)
     embed.add_field(name="Aave", value="Value of aave", inline=True)
     embed.add_field(name="Avalanche", value="Value of avalanche", inline=True)
     embed.add_field(name="AxieInfinity", value="Value of axie infinity", inline=True)
@@ -74,15 +69,21 @@ async def cryptohelp(ctx):
     embed.add_field(name="Vechain", value="Value of vechain", inline=True)
     embed.add_field(name="Venus", value="Value of venus", inline=True)
     embed.add_field(name="WrappedBitcoin", value="Value of wrappedbitcoin", inline=True)
+
     await ctx.author.send(embed=embed)
-    await ctx.send("Help sent in DM's.")
+    await ctx.respond("Help sent in DM's.")
 
-@client.command()
-async def ping(ctx):
-    await ctx.send(f'My ping is {client.latency}!')
+@bot.slash_command(name = "hoststats", description = "Get bot info.")
+async def hoststats(ctx):
+    embed=discord.Embed(title="Hosting Stats", color=0xfff00)
+    embed.add_field(name="Operating System", value="Ubuntu 18.04 x64", inline=False)
+    embed.add_field(name="Pycord Version", value="0.1.1", inline=False)
+    embed.add_field(name="Hosting Service", value="Vultr", inline=False)
+    embed.add_field(name="Ram", value="1024 MB", inline=False)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Ethereum(ctx):
+@bot.slash_command(name = "ethereum", description = "Value of ethereum")
+async def ethereum(ctx):
     ETH = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd").text
     ETH = json.loads(ETH)
     ETHCHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_24hr_change=true").text
@@ -93,10 +94,10 @@ async def Ethereum(ctx):
     embed.set_author(name = "Ethereum")
     embed.add_field(name=ETH["ethereum"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Bitcoin(ctx):
+@bot.slash_command(name = "bitcoin", description = "Value of bitcoin")
+async def bitcoin(ctx):
     BTC = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd").text
     BTC = json.loads(BTC)
     BTCCHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true").text
@@ -107,10 +108,10 @@ async def Bitcoin(ctx):
     embed.set_author(name = "Bitcoin")
     embed.add_field(name=BTC["bitcoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Dogecoin(ctx):
+@bot.slash_command(name = "dogecoin", description = "Value of dogecoin")
+async def dogecoin(ctx):
     DOGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd").text
     DOGE = json.loads(DOGE)
     DOGECHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd&include_24hr_change=true").text
@@ -121,10 +122,10 @@ async def Dogecoin(ctx):
     embed.set_author(name = "Dogecoin")
     embed.add_field(name=DOGE["dogecoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def EthereumClassic(ctx):
+@bot.slash_command(name = "ethereumclassic", description = "Value of ethereum classic")
+async def ethereumclassic(ctx):
     ETC = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum-classic&vs_currencies=usd").text
     ETC = json.loads(ETC)
     ETCCHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum-classic&vs_currencies=usd&include_24hr_change=true").text
@@ -135,10 +136,10 @@ async def EthereumClassic(ctx):
     embed.set_author(name = "Ethereum Classic")
     embed.add_field(name=ETC["ethereum-classic"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def ShibaInu(ctx):
+@bot.slash_command(name = "shibainu", description = "Value of shibainu")
+async def shibainu(ctx):
     SHIB = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=shiba-inu&vs_currencies=usd").text
     SHIB = json.loads(SHIB)
     SHIBCHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=shiba-inu&vs_currencies=usd&include_24hr_change=true").text
@@ -149,10 +150,10 @@ async def ShibaInu(ctx):
     embed.set_author(name = "Shiba Inu")
     embed.add_field(name=SHIB["shiba-inu"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Ripple(ctx):
+@bot.slash_command(name = "ripple", description = "Value of ripple")
+async def ripple(ctx):
     XRP = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd").text
     XRP = json.loads(XRP)
     XRPCHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd&include_24hr_change=true").text
@@ -163,10 +164,10 @@ async def Ripple(ctx):
     embed.set_author(name = "Ripple")
     embed.add_field(name=XRP["ripple"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Orfano(ctx):
+@bot.slash_command(name = "orfano", description = "Value of orfano")
+async def orfano(ctx):
     ORFAN = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=orfano&vs_currencies=usd").text
     ORFAN = json.loads(ORFAN)
     ORFANCHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=orfano&vs_currencies=usd&include_24hr_change=true").text
@@ -177,10 +178,10 @@ async def Orfano(ctx):
     embed.set_author(name = "Orfano")
     embed.add_field(name=ORFAN["orfano"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Litecoin(ctx):
+@bot.slash_command(name = "litecoin", description = "Value of litecoin")
+async def litecoin(ctx):
     LTC = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=litecoin&vs_currencies=usd").text
     LTC = json.loads(LTC)
     LTCCHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=litecoin&vs_currencies=usd&include_24hr_change=true").text
@@ -191,10 +192,10 @@ async def Litecoin(ctx):
     embed.set_author(name = "Litecoin")
     embed.add_field(name=LTC["litecoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Cardano(ctx):
+@bot.slash_command(name = "cardano", description = "Value of cardano")
+async def cardano(ctx):
     ADA = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd").text
     ADA = json.loads(ADA)
     ADACHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd&include_24hr_change=true").text
@@ -205,10 +206,10 @@ async def Cardano(ctx):
     embed.set_author(name = "Cardano")
     embed.add_field(name=ADA["cardano"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def BinanceCoin(ctx):
+@bot.slash_command(name = "binancecoin", description = "Value of binance coin")
+async def binancecoin(ctx):
     BNB = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd").text
     BNB = json.loads(BNB)
     BNBCHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd&include_24hr_change=true").text
@@ -219,10 +220,10 @@ async def BinanceCoin(ctx):
     embed.set_author(name = "Binance Coin")
     embed.add_field(name=BNB["binancecoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Venus(ctx):
+@bot.slash_command(name = "venus", description = "Value of venus")
+async def venus(ctx):
     XVS = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=venus&vs_currencies=usd").text
     XVS = json.loads(XVS)
     XVSCHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=venus&vs_currencies=usd&include_24hr_change=true").text
@@ -233,10 +234,10 @@ async def Venus(ctx):
     embed.set_author(name = "Venus")
     embed.add_field(name=XVS["venus"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def IOTA(ctx):
+@bot.slash_command(name = "iota", description = "Value of iota")
+async def iota(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=iota&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=iota&vs_currencies=usd&include_24hr_change=true").text
@@ -247,10 +248,10 @@ async def IOTA(ctx):
     embed.set_author(name = "IOTA")
     embed.add_field(name=PRICE["iota"]["usd"], value="USD", inline=False)
     embed.add_field(name=CHANGE["iota"]["usd_24h_change"], value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def FTXToken(ctx):
+@bot.slash_command(name = "ftxtoken", description = "Value of ftxtoken")
+async def ftxtoken(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=ftx-token&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=ftx-token&vs_currencies=usd&include_24hr_change=true").text
@@ -261,10 +262,10 @@ async def FTXToken(ctx):
     embed.set_author(name = "FTX Token")
     embed.add_field(name=PRICE["ftx-token"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Tezos(ctx):
+@bot.slash_command(name = "tezos", description = "Value of tezos")
+async def tezos(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=tezos&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=tezos&vs_currencies=usd&include_24hr_change=true").text
@@ -275,10 +276,10 @@ async def Tezos(ctx):
     embed.set_author(name = "Tezos")
     embed.add_field(name=PRICE["tezos"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Cosmos(ctx):
+@bot.slash_command(name = "cosmos", description = "Value of cosmos")
+async def cosos(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=cosmos&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=cosmos&vs_currencies=usd&include_24hr_change=true").text
@@ -289,10 +290,10 @@ async def Cosmos(ctx):
     embed.set_author(name = "Cosmos")
     embed.add_field(name=PRICE["cosmos"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def PancakeSwap(ctx):
+@bot.slash_command(name = "pancakeswap", description = "Value of pancake swap")
+async def pancakeswap(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=pancakeswap-token&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=pancakeswap-token&vs_currencies=usd&include_24hr_change=true").text
@@ -303,10 +304,10 @@ async def PancakeSwap(ctx):
     embed.set_author(name = "PancakeSwap")
     embed.add_field(name=PRICE["pancakeswap-token"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Maker(ctx):
+@bot.slash_command(name = "maker", description = "Value of maker")
+async def maker(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=maker&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=maker&vs_currencies=usd&include_24hr_change=true").text
@@ -317,10 +318,10 @@ async def Maker(ctx):
     embed.set_author(name = "Maker")
     embed.add_field(name=PRICE["maker"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Avalanche(ctx):
+@bot.slash_command(name = "avalanche", description = "Value of avalanche")
+async def avalanche(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=avalanche&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=avalanche&vs_currencies=usd&include_24hr_change=true").text
@@ -331,10 +332,10 @@ async def Avalanche(ctx):
     embed.set_author(name = "Avalanche")
     embed.add_field(name=PRICE["avalanche"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Kusama(ctx):
+@bot.slash_command(name = "kusama", description = "Value of kusama")
+async def kusama(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=kusama&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=kusama&vs_currencies=usd&include_24hr_change=true").text
@@ -345,10 +346,10 @@ async def Kusama(ctx):
     embed.set_author(name = "Kusama")
     embed.add_field(name=PRICE["kusama"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Filecoin(ctx):
+@bot.slash_command(name = "filecoin", description = "Value of filecoin")
+async def filecoin(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=filecoin&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=filecoin&vs_currencies=usd&include_24hr_change=true").text
@@ -359,10 +360,10 @@ async def Filecoin(ctx):
     embed.set_author(name = "Filecoin")
     embed.add_field(name=PRICE["filecoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Polygon(ctx):
+@bot.slash_command(name = "polygon", description = "Value of polygon")
+async def polygon(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd&include_24hr_change=true").text
@@ -373,10 +374,10 @@ async def Polygon(ctx):
     embed.set_author(name = "Polygon")
     embed.add_field(name=PRICE["matic-network"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Terra(ctx):
+@bot.slash_command(name = "terra", description = "Value of terra")
+async def terra(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=terra-luna&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=terra-luna&vs_currencies=usd&include_24hr_change=true").text
@@ -387,10 +388,10 @@ async def Terra(ctx):
     embed.set_author(name = "Terra")
     embed.add_field(name=PRICE["terra-luna"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Solana(ctx):
+@bot.slash_command(name = "solana", description = "Value of solana")
+async def solana(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd&include_24hr_change=true").text
@@ -401,10 +402,10 @@ async def Solana(ctx):
     embed.set_author(name = "Solana")
     embed.add_field(name=PRICE["solana"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def BitcoinSV(ctx):
+@bot.slash_command(name = "bitcoinsv", description = "Value of bitcoinsv")
+async def bitcoinsv(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash-sv&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash-sv&vs_currencies=usd&include_24hr_change=true").text
@@ -415,10 +416,10 @@ async def BitcoinSV(ctx):
     embed.set_author(name = "Bitcoin SV")
     embed.add_field(name=PRICE["bitcoin-cash-sv"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Tron(ctx):
+@bot.slash_command(name = "tron", description = "Value of tron")
+async def tron(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=tron&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=tron&vs_currencies=usd&include_24hr_change=true").text
@@ -429,10 +430,10 @@ async def Tron(ctx):
     embed.set_author(name = "Tron")
     embed.add_field(name=PRICE["tron"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Uniswap(ctx):
+@bot.slash_command(name = "uniswap", description = "Value of uniswap")
+async def uniswap(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=uniswap&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=uniswap&vs_currencies=usd&include_24hr_change=true").text
@@ -443,10 +444,10 @@ async def Uniswap(ctx):
     embed.set_author(name = "Uniswap")
     embed.add_field(name=PRICE["uniswap"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Chainlink(ctx):
+@bot.slash_command(name = "chainlink", description = "Value of chainlink")
+async def chainlink(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=chainlink&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=chainlink&vs_currencies=usd&include_24hr_change=true").text
@@ -457,10 +458,10 @@ async def Chainlink(ctx):
     embed.set_author(name = "Chainlink")
     embed.add_field(name=PRICE["chainlink"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Vechain(ctx):
+@bot.slash_command(name = "vechain", description = "Value of vechain")
+async def vechain(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=vechain&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=vechain&vs_currencies=usd&include_24hr_change=true").text
@@ -471,10 +472,10 @@ async def Vechain(ctx):
     embed.set_author(name = "VeChain")
     embed.add_field(name=PRICE["vechain"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Stellar(ctx):
+@bot.slash_command(name = "stellar", description = "Value of stellar")
+async def stellar(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=stellar&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=stellar&vs_currencies=usd&include_24hr_change=true").text
@@ -485,10 +486,10 @@ async def Stellar(ctx):
     embed.set_author(name = "Stellar")
     embed.add_field(name=PRICE["stellar"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Neo(ctx):
+@bot.slash_command(name = "neo", description = "Value of neo")
+async def neo(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=neo&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=neo&vs_currencies=usd&include_24hr_change=true").text
@@ -499,10 +500,10 @@ async def Neo(ctx):
     embed.set_author(name = "Neo")
     embed.add_field(name=PRICE["neo"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Aave(ctx):
+@bot.slash_command(name = "aave", description = "Value of aave")
+async def aave(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=aave&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=aave&vs_currencies=usd&include_24hr_change=true").text
@@ -513,10 +514,10 @@ async def Aave(ctx):
     embed.set_author(name = "Aave")
     embed.add_field(name=PRICE["aave"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Eos(ctx):
+@bot.slash_command(name = "eos", description = "Value of eos")
+async def eos(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=eos&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=eos&vs_currencies=usd&include_24hr_change=true").text
@@ -527,10 +528,10 @@ async def Eos(ctx):
     embed.set_author(name = "Eos")
     embed.add_field(name=PRICE["eos"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def Theta(ctx):
+@bot.slash_command(name = "theta", description = "Value of theta")
+async def theta(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=theta-token&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=theta-token&vs_currencies=usd&include_24hr_change=true").text
@@ -541,10 +542,10 @@ async def Theta(ctx):
     embed.set_author(name = "Theta")
     embed.add_field(name=PRICE["theta-token"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def BitcoinCash(ctx):
+@bot.slash_command(name = "bitcoincash", description = "Value of bitcoin cash")
+async def bitcoincash(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash&vs_currencies=usd&include_24hr_change=true").text
@@ -555,10 +556,10 @@ async def BitcoinCash(ctx):
     embed.set_author(name = "Bitcoin Cash")
     embed.add_field(name=PRICE["bitcoin-cash"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def UsdCoin(ctx):
+@bot.slash_command(name = "usdcoin", description = "Value of usd coin")
+async def usdcoin(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=usd-coin&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=usd-coin&vs_currencies=usd&include_24hr_change=true").text
@@ -569,10 +570,10 @@ async def UsdCoin(ctx):
     embed.set_author(name = "Usd Coin")
     embed.add_field(name=PRICE["usd-coin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def WrappedBitcoin(ctx):
+@bot.slash_command(name = "wrappedbitcoin", description = "Value of wrappedbitcoin")
+async def wrappedbitcoin(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=wrapped-bitcoin&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=wrapped-bitcoin&vs_currencies=usd&include_24hr_change=true").text
@@ -583,10 +584,10 @@ async def WrappedBitcoin(ctx):
     embed.set_author(name = "Wrapped Bitcoin")
     embed.add_field(name=PRICE["wrapped-bitcoin"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def SLP(ctx):
+@bot.slash_command(name = "slp", description = "Value of slp")
+async def slp(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=usd&include_24hr_change=true").text
@@ -597,10 +598,10 @@ async def SLP(ctx):
     embed.set_author(name = "Smooth Love Potion")
     embed.add_field(name=PRICE["smooth-love-potion"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def AxieInfinity(ctx):
+@bot.slash_command(name = "axieinfinity", description = "Value of axieinfinity")
+async def axieinfinity(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=usd&include_24hr_change=true").text
@@ -611,10 +612,10 @@ async def AxieInfinity(ctx):
     embed.set_author(name = "Axie Infinity")
     embed.add_field(name=PRICE["axie-infinity"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-@client.command()
-async def CryptoBlades(ctx):
+@bot.slash_command(name = "cryptoblades", description = "Value of cryptoblades")
+async def cryptoblades(ctx):
     PRICE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=cryptoblades&vs_currencies=usd").text
     PRICE = json.loads(PRICE)
     CHANGE = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=cryptoblades&vs_currencies=usd&include_24hr_change=true").text
@@ -625,6 +626,6 @@ async def CryptoBlades(ctx):
     embed.set_author(name = "CryptoBlades")
     embed.add_field(name=PRICE["cryptoblades"]["usd"], value="USD", inline=False)
     embed.add_field(name=test, value="Change percent in last 24 hours", inline=False)
-    await ctx.send(embed=embed)
+    await ctx.respond(embed=embed)
 
-client.run("discord_bot_token")
+bot.run(BOT_TOKEN)
